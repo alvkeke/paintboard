@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">paintboard</string>
+    <string name="app_name">paintBoard</string>
+    <string name="btn_title_newPaint">New Paint</string>
+    <string name="btn_title_restore">Restore</string>
+    <string name="menu_title_clear">clear</string>
+    <string name="menu_title_save">save</string>
+    <string name="menu_title_exit">exit</string>
 </resources>
