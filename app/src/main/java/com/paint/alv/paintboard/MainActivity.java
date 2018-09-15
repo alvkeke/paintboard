@@ -1,12 +1,13 @@
 package com.paint.alv.paintboard;
 
+
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,6 +36,14 @@ public class MainActivity extends AppCompatActivity {
         ims[8] = findViewById(R.id.img02);
         //变量用于存放选中的图片
 
+        /*
+        循环设置图片
+         */
+        for(int i = 0; i<9; i++){
+            ims[i].setScaleType(ImageView.ScaleType.FIT_CENTER);
+        }
+
+        //ims[0].setImageBitmap(BitmapFactory.decodeFile("/mnt/sdcard/PaintBoard/2018-09-16-12_37_18.jpg"));
 
         //给按钮添加点击事件相应
         //新建按钮
@@ -52,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
 
 
     }

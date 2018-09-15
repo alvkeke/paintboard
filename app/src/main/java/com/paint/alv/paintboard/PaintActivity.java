@@ -1,10 +1,13 @@
 package com.paint.alv.paintboard;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +19,12 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 public class PaintActivity extends AppCompatActivity {
 
@@ -85,6 +94,23 @@ public class PaintActivity extends AppCompatActivity {
         });
 
 
+                /*
+        向用户获取磁盘读取权限
+         */
+        //定义变量
+        int REQUEST_EXTERNAL_STORAGE = 1;
+        //定义存储权限的字符串数组
+        String[] PERMISSIONS_STORAGE = {
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+        };
+        //定义变量用于获取当前权限情况
+        int permissionStatus = ActivityCompat.checkSelfPermission(PaintActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        //如果当前用户没有允许,则向用户请求权限
+        if(permissionStatus != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(PaintActivity.this, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
+        }
+
     }
 
     //初始化菜单
@@ -106,7 +132,37 @@ public class PaintActivity extends AppCompatActivity {
 
                 break;
             case R.id.menuSave:
-                Toast.makeText(getApplicationContext(), "Save", Toast.LENGTH_SHORT).show();
+                //判断保存图片的文件夹是否存在
+                File picFolder = new File("/mnt/sdcard/PaintBoard/");
+                if(!picFolder.exists()){
+                    //不存在则创建
+                    picFolder.mkdirs();
+                }
+                //获取系统时间
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-hh_mm_ss");
+                String data = sdf.format(new java.util.Date());
+                //利用系统事件设置保存的文件名称
+                File picfile = new File(picFolder, data + ".jpg");
+                //获得输出文件流,并将文件输出
+                try {
+                    FileOutputStream fos = new FileOutputStream(picfile);
+                    //压缩图片
+                    bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                    //刷新缓冲区,输出图片
+                    fos.flush();
+                    //关闭输出流
+                    fos.close();
+                } catch (FileNotFoundException e) {
+                    //如果抛出异常则显示保存失败的消息
+                    Toast.makeText(getApplicationContext(), "Fielded to save picture:creating out put stream error.", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    Toast.makeText(getApplicationContext(), "Fielded to save picture:flushing buffer error.", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+
+                //保存文件成功
+                Toast.makeText(getApplicationContext(), "Save Success!", Toast.LENGTH_SHORT).show();
                 break;
         }
         return true;

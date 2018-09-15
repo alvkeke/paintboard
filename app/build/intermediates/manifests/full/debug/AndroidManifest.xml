@@ -27,7 +27,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.paint.alv.paintboard.PaintActivity" />
+        <activity
+            android:name="com.paint.alv.paintboard.PaintActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
