@@ -36,24 +36,34 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:padding="5dp"
             android:orientation="horizontal"
             android:layout_weight="3">
 
             <ImageView
                 android:layout_width="0dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_height="match_parent"
+                android:scaleType="center"
                 android:layout_weight="1"
                 android:id="@+id/img00"/>
 
             <ImageView
                 android:layout_width="0dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_height="match_parent"
+                android:scaleType="center"
                 android:id="@+id/img01"
                 android:layout_weight="1"/>
             <ImageView
                 android:layout_width="0dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_height="match_parent"
+                android:scaleType="center"
                 android:id="@+id/img02"
                 android:layout_weight="1"/>
 
@@ -61,24 +71,34 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:padding="5dp"
             android:orientation="horizontal"
             android:layout_weight="3">
 
             <ImageView
                 android:layout_width="0dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_height="match_parent"
+                android:scaleType="center"
                 android:id="@+id/img10"
                 android:layout_weight="1"/>
 
             <ImageView
                 android:layout_width="0dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_height="match_parent"
+                android:scaleType="center"
                 android:id="@+id/img11"
                 android:layout_weight="1"/>
             <ImageView
                 android:layout_width="0dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_height="match_parent"
+                android:scaleType="center"
                 android:id="@+id/img12"
                 android:layout_weight="1"/>
 
@@ -86,24 +106,34 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:orientation="horizontal"
+            android:padding="5dp"
             android:layout_weight="3">
 
             <ImageView
                 android:layout_width="0dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_height="match_parent"
+                android:scaleType="center"
                 android:id="@+id/img20"
                 android:layout_weight="1"/>
 
             <ImageView
                 android:layout_width="0dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_height="match_parent"
+                android:scaleType="center"
                 android:id="@+id/img21"
                 android:layout_weight="1"/>
             <ImageView
                 android:layout_width="0dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_height="match_parent"
+                android:scaleType="center"
                 android:id="@+id/img22"
                 android:layout_weight="1"/>
 

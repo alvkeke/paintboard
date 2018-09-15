@@ -2,11 +2,14 @@ package com.paint.alv.paintboard;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +29,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 
+import static android.graphics.Bitmap.Config.ARGB_8888;
+
 public class PaintActivity extends AppCompatActivity {
 
     //定义一个画笔,一个画布,和一个ImageView
@@ -34,7 +39,7 @@ public class PaintActivity extends AppCompatActivity {
     private Paint paint;
     private Bitmap bmp;
 
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint({"ClickableViewAccessibility", "NewApi"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +59,10 @@ public class PaintActivity extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         //初始化变量
         imageView = findViewById(R.id.imagePaint);
-        bmp = Bitmap.createBitmap(dm.widthPixels, dm.heightPixels, Bitmap.Config.ARGB_8888);
+
+        bmp = Bitmap.createBitmap(dm.widthPixels, dm.heightPixels, ARGB_8888);
         canvas = new Canvas(bmp);
+        //canvas = new Canvas(Bitmap.createBitmap(dm.widthPixels, dm.heightPixels, ARGB_8888));
         canvas.drawColor(Color.GRAY);
         paint = new Paint();
         //设置画笔颜色
@@ -64,7 +71,18 @@ public class PaintActivity extends AppCompatActivity {
         paint.setStrokeWidth(3);
         //给ImageView添加画布
         imageView.setImageBitmap(bmp);
-        //给画板设置绘画的触摸监听,最懂一点进行操作
+
+        //获取传入的变量
+        Intent intent = getIntent();
+        String s = intent.getStringExtra("addrpic");
+        //判断传入变量是否为空,为空则为新建图像
+        if(s != null) {
+            //Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+            //将位图画入画布中
+            canvas.drawBitmap(BitmapFactory.decodeFile(s), 0, 0, null);
+        }
+
+        //给画板设置绘画的触摸监听,最多一点进行操作
         imageView.setOnTouchListener(new View.OnTouchListener() {
             //定义变量来储存开始触摸是的点
             float oldX, oldY;
@@ -94,22 +112,7 @@ public class PaintActivity extends AppCompatActivity {
         });
 
 
-                /*
-        向用户获取磁盘读取权限
-         */
-        //定义变量
-        int REQUEST_EXTERNAL_STORAGE = 1;
-        //定义存储权限的字符串数组
-        String[] PERMISSIONS_STORAGE = {
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-        };
-        //定义变量用于获取当前权限情况
-        int permissionStatus = ActivityCompat.checkSelfPermission(PaintActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        //如果当前用户没有允许,则向用户请求权限
-        if(permissionStatus != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(PaintActivity.this, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
-        }
+
 
     }
 
