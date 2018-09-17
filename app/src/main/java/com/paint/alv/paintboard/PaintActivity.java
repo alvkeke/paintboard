@@ -80,7 +80,6 @@ public class PaintActivity extends AppCompatActivity {
             //Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
             //将位图画入画布中
             canvas.drawBitmap(BitmapFactory.decodeFile(s), 0, 0, null);
-            System.out.println();
         }
 
         //给画板设置绘画的触摸监听,最多一点进行操作
