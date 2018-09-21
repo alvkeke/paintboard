@@ -30,6 +30,10 @@
         <activity
             android:name="com.paint.alv.paintboard.PaintActivity"
             android:exported="true" />
+        <activity
+            android:name="com.paint.alv.paintboard.PaintSetting"
+            android:theme="@style/Theme.AppCompat.Dialog" >
+        </activity>
     </application>
 
 </manifest>

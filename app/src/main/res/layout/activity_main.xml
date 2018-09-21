@@ -46,7 +46,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_height="match_parent"
-                android:scaleType="center"
+                android:scaleType="fitCenter"
                 android:layout_weight="1"
                 android:id="@+id/img00"/>
 
@@ -55,7 +55,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_height="match_parent"
-                android:scaleType="center"
+                android:scaleType="fitCenter"
                 android:id="@+id/img01"
                 android:layout_weight="1"/>
             <ImageView
@@ -63,7 +63,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_height="match_parent"
-                android:scaleType="center"
+                android:scaleType="fitCenter"
                 android:id="@+id/img02"
                 android:layout_weight="1"/>
 
@@ -81,7 +81,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_height="match_parent"
-                android:scaleType="center"
+                android:scaleType="fitCenter"
                 android:id="@+id/img10"
                 android:layout_weight="1"/>
 
@@ -90,7 +90,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_height="match_parent"
-                android:scaleType="center"
+                android:scaleType="fitCenter"
                 android:id="@+id/img11"
                 android:layout_weight="1"/>
             <ImageView
@@ -98,7 +98,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_height="match_parent"
-                android:scaleType="center"
+                android:scaleType="fitCenter"
                 android:id="@+id/img12"
                 android:layout_weight="1"/>
 
@@ -116,7 +116,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_height="match_parent"
-                android:scaleType="center"
+                android:scaleType="fitCenter"
                 android:id="@+id/img20"
                 android:layout_weight="1"/>
 
@@ -125,7 +125,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_height="match_parent"
-                android:scaleType="center"
+                android:scaleType="fitCenter"
                 android:id="@+id/img21"
                 android:layout_weight="1"/>
             <ImageView
@@ -133,7 +133,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_height="match_parent"
-                android:scaleType="center"
+                android:scaleType="fitCenter"
                 android:id="@+id/img22"
                 android:layout_weight="1"/>
 

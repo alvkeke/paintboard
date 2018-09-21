@@ -1,16 +1,14 @@
 package com.paint.alv.paintboard;
 
-import android.Manifest;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.os.Build;
-import android.support.v4.app.ActivityCompat;
+import android.os.Environment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +26,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import static android.graphics.Bitmap.Config.ARGB_8888;
 
@@ -39,7 +38,8 @@ public class PaintActivity extends AppCompatActivity {
     private Paint paint;
     private Bitmap bmp;
 
-    @SuppressLint({"ClickableViewAccessibility", "NewApi"})
+
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,11 +109,28 @@ public class PaintActivity extends AppCompatActivity {
                 }
                 return true;
             }
+
         });
 
 
+    }
 
+    //获取PaintSetting返回的值
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
 
+        //判断请求的值,一般大于1
+        if(requestCode == 2){
+            //Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT).show();
+            //取得返回值
+            Float penSize = data.getFloatExtra("PenSize", 3);
+            int penColor = data.getIntExtra("PenColor", 0xff0000);
+            //给画笔设置返回的信息
+            paint.setStrokeWidth(penSize);
+            paint.setColor(penColor);
+
+        }
     }
 
     //初始化菜单
@@ -134,18 +151,38 @@ public class PaintActivity extends AppCompatActivity {
             case R.id.menuExit:
 
                 break;
+            case R.id.menuSetting:
+                //设置要传入设置窗口的数据
+                Intent intentSetting = new Intent(PaintActivity.this, PaintSetting.class);
+                //画笔粗细
+                intentSetting.putExtra("PenSize", paint.getStrokeWidth());
+                //画笔颜色
+                intentSetting.putExtra("PenColor", paint.getColor());
+
+                //显示窗口,需要返回返回值
+                startActivityForResult(intentSetting, 2);
+                break;
             case R.id.menuSave:
                 //判断保存图片的文件夹是否存在
-                File picFolder = new File("/mnt/sdcard/PaintBoard/");
+                File picFolder = new File(Environment.getExternalStorageDirectory().getPath() + "/PaintBoard/");
                 if(!picFolder.exists()){
                     //不存在则创建
-                    picFolder.mkdirs();
+                    if(!picFolder.mkdirs()){
+                        Toast.makeText(getApplicationContext(), "Failed to Create Main Folder", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
-                //获取系统时间
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-hh_mm_ss");
-                String data = sdf.format(new java.util.Date());
                 //利用系统事件设置保存的文件名称
-                File picfile = new File(picFolder, data + ".jpg");
+                Intent intent = getIntent();
+                File picfile;
+                if(intent.getStringExtra("addrpic") != null){
+                    picfile = new File(intent.getStringExtra("addrpic"));
+                }else {
+                    //获取系统时间
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-hh_mm_ss", Locale.CHINA);
+                    String time_filename = sdf.format(new java.util.Date());
+                    picfile = new File(picFolder, time_filename + ".jpg");
+                }
                 //获得输出文件流,并将文件输出
                 try {
                     FileOutputStream fos = new FileOutputStream(picfile);
@@ -157,10 +194,10 @@ public class PaintActivity extends AppCompatActivity {
                     fos.close();
                 } catch (FileNotFoundException e) {
                     //如果抛出异常则显示保存失败的消息
-                    Toast.makeText(getApplicationContext(), "Fielded to save picture:creating out put stream error.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Failed to save picture:creating out put stream error.", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 } catch (IOException e) {
-                    Toast.makeText(getApplicationContext(), "Fielded to save picture:flushing buffer error.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Failed to save picture:flushing buffer error.", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
 

@@ -2,7 +2,13 @@
     <string name="app_name">paintBoard</string>
     <string name="btn_title_newPaint">New Paint</string>
     <string name="btn_title_restore">Restore</string>
-    <string name="menu_title_clear">clear</string>
-    <string name="menu_title_save">save</string>
-    <string name="menu_title_exit">exit</string>
+    <string name="menu_title_clear">Clear</string>
+    <string name="menu_title_save">Save</string>
+    <string name="menu_title_exit">Exit</string>
+    <string name="title_activity_paint_setting">PaintSetting</string>
+    <string name="menu_title_setting">Settings</string>
+    <string name="dia_str_pensize">Size of th Pen</string>
+    <string name="dia_str_pencolor">Color of the Pen</string>
+    <string name="dia_title_ok">OK</string>
+    <string name="dia_title_cancel">Cancel</string>
 </resources>

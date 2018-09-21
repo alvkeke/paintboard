@@ -8,10 +8,17 @@
         android:id="@+id/menuClear"/>
 
     <item
+        android:id="@+id/menuSetting"
+        android:title="@string/menu_title_setting" />
+
+    <item
         android:title="@string/menu_title_save"
         android:id="@+id/menuSave"/>
 
     <item
         android:title="@string/menu_title_exit"
         android:id="@+id/menuExit"/>
+
+
+
 </menu>
